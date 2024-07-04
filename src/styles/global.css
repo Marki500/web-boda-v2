@@ -73,3 +73,7 @@ textarea {
 .cuenta-atras {
   font-size: 6rem;
 }
+
+#peluCountNumber{
+  display: none;
+}

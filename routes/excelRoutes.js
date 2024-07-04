@@ -15,7 +15,7 @@ const pool = mysql.createPool({
   database: process.env.DB_NAME
 });
 
-router.get('/descargar-respuestas', async (req, res) => {
+router.get('http://localhost:3000/api/excel/descargar-respuestas', async (req, res) => {
   try {
     const workbook = new ExcelJS.Workbook();
     const sheet = workbook.addWorksheet('Respuestas del Formulario');
@@ -42,7 +42,7 @@ router.get('/descargar-respuestas', async (req, res) => {
   }
 });
 
-router.get('/descargar-dormir', async (req, res) => {
+router.get('http://localhost:3000/api/excel/descargar-dormir', async (req, res) => {
   try {
     const workbook = new ExcelJS.Workbook();
     const sheet = workbook.addWorksheet('Invitados que Pernoctan');
@@ -66,7 +66,7 @@ router.get('/descargar-dormir', async (req, res) => {
   }
 });
 
-router.get('/descargar-invitados', async (req, res) => {
+router.get('http://localhost:3000/api/excel/descargar-invitados', async (req, res) => {
   try {
     const workbook = new ExcelJS.Workbook();
     const sheet = workbook.addWorksheet('Todos los Invitados');

@@ -30,7 +30,9 @@ app.use('/api/form', formRoutes);
 app.use('/api/excel', excelRoutes);
 
 // Proxy para redirigir solicitudes al servidor de desarrollo de Astro
+// Ejemplo: Aplicar el proxy solo a rutas específicas
 app.use('/', createProxyMiddleware({ target: 'http://localhost:4321', changeOrigin: true }));
+
 
 app.listen(port, () => {
   console.log(`Servidor escuchando en http://localhost:${port}`);

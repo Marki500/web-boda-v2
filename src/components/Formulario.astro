@@ -1,7 +1,8 @@
 ---
+// Aquí podría ir alguna lógica o importación necesaria si es que la hubiera
 ---
 <section class="flex flex-row text-center items-center justify-center gap-16 max-w-7xl m-auto pt-16 pb-16">
-  <form id="contactForm" class="w-7xl">
+  <form id="contactForm" class="w-full">
     <label class="text-4xl">¿Vendrás?</label><br>
     <div class="radios flex flex-row gap-8 items-center justify-center">
       <div class="radio1">
@@ -14,11 +15,12 @@
       </div>
     </div>
 
-    <div class="guests flex flex-row gap-8">
+    <!-- Elementos que aparecen si seleccionan "Sí" -->
+    <div class="guests flex flex-row gap-8 justify-center">
       <div class="column-invitados-boda" id="guestCountInput" style="display: none;">
         <div class="flex flex-row gap-4 items-center justify-center">
           <label for="guestsCount">¿Cuántos vendrán?</label>
-          <input type="number" id="guestsCount" name="guestsCount" min="0">
+          <input type="number" id="guestsCount" name="guestsCount" min="0" value="1" >
         </div>
     
         <div id="guestNames"></div>
@@ -27,22 +29,9 @@
       <div class="invitados-dormir" id="overnightInput" style="display: none;">
         <div class="flex flex-row gap-4 items-center justify-center">
           <label for="overnightCount">¿Cuántos se quedarán a dormir?</label>
-          <input type="number" id="overnightCount" name="overnightCount" min="0">
+          <input type="number" id="overnightCount" name="overnightCount" min="0" value="1" >
         </div>
         <div id="overnightGuestNames"></div>
-      </div>
-  
-      
-    </div>
-
-    <div class="radio-pelu">
-      <div class="radio1-pelu">
-        <input type="radio" id="peluSi" name="pelu" value="yes">
-        <label for="peluSi">Sí</label>
-      </div>
-      <div class="radio2-pelu">
-        <input type="radio" id="peluNo" name="pelu" value="no">
-        <label for="peluNo">No</label><br>
       </div>
     </div>
 
@@ -51,7 +40,27 @@
       <textarea id="allergies" name="allergies" rows="4"></textarea>
     </div>
 
-    <button type="submit" class="align-middle select-none font-sans font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 px-6 rounded-lg bg-amber-800 text-white shadow-md shadow-gray-900/10 hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none">Enviar</button>
+    <!-- Sección de servicio de peluquería, inicialmente oculta -->
+    <div class="radios-pelu flex flex-col items-center justify-center mt-8" id="peluInput" style="display: none;">
+      <label class="text-4xl">¿Necesitaréis servicio de peluquería?</label>
+      <div class="radio-pelu flex flex-row items-center justify-center gap-8">
+        <div class="radio1-pelu">
+          <input type="radio" id="peluSi" name="pelu" value="yes">
+          <label for="peluSi">Sí</label>
+        </div>
+        <div class="radio2-pelu">
+          <input type="radio" id="peluNo" name="pelu" value="no">
+          <label for="peluNo">No</label><br>
+        </div>
+      </div>
+      <div id="peluCountNumber" class="flex flex-row gap-4 items-center justify-center">
+        <label for="peluCount">¿Cuantas necesitan peluqueria?</label>
+        <input type="number" id="peluCount" name="peluCount" min="0" value="1">
+      </div>
+      <div id="peluGuestNames"></div>  <!-- Div para los nombres de los invitados que desean servicio de peluquería -->
+    </div>
+
+    <button type="submit" class="align-middle select-none font-sans font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 px-6 rounded-lg bg-amber-800 text-white shadow-md shadow-gray-900/10 hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none">Enviar</button>
   </form>
   <script src="/src/scripts/form-handler.js"></script>
 </section>
