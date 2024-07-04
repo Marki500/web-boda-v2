@@ -1,0 +1,104 @@
+---
+---
+<section class="flex flex-row text-center items-center justify-center gap-16 max-w-7xl m-auto pt-16 pb-16">
+    <script src="src/scripts/countdown.js" type="module" defer></script>
+    <div class="wrap">
+      <div class="countdown">
+        <div class="bloc-time days" data-init-value="0">
+          <span class="count-title">Dias</span>
+          <div class="figure days-1">
+            <span class="major">0</span>
+          </div>
+          <div class="figure days-2">
+            <span class="major">0</span>
+          </div>
+          <div class="figure days-3">
+            <span class="major">0</span>
+          </div>
+        </div>
+        <div class="bloc-time hours" data-init-value="24">
+          <span class="count-title">Horas</span>
+          <div class="figure hours-1">
+            <span class="major">0</span>
+          </div>
+          <div class="figure hours-2">
+            <span class="major">0</span>
+          </div>
+        </div>
+        <div class="bloc-time minutes" data-init-value="0">
+          <span class="count-title">Minutos</span>
+          <div class="figure minutes-1">
+            <span class="major">0</span>
+          </div>
+          <div class="figure minutes-2">
+            <span class="major">0</span>
+          </div>
+        </div>
+        <div class="bloc-time seconds" data-init-value="0">
+          <span class="count-title">Segundos</span>
+          <div class="figure seconds-1">
+            <span class="major">0</span>
+          </div>
+          <div class="figure seconds-2">
+            <span class="major">0</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <style >
+  .countdown {
+    margin: auto;
+    display: flex;
+    justify-content: center;
+  }
+
+  .bloc-time {
+    float: left;    
+    margin-right: 45px;    
+    text-align: center;    
+  }
+
+  .bloc-time:last-child {
+    margin-right: 0;
+  }
+
+  .count-title {
+    display: block;
+    margin-bottom: 15px;
+    font-family: 'Great Vibes' ,system-ui, sans-serif;
+    font-size: 2rem;
+    color: #000;
+  }
+
+  .figure {
+    position: relative;
+    float: left;
+    height: 110px;
+    width: 100px;
+    margin-right: 10px;
+    background-color: #fff;
+    border-radius: 8px; 
+    box-shadow: 0 3px 4px 0 rgba(0, 0, 0, .2), inset 2px 4px 0 0 rgba(255, 255, 255, .08);
+    overflow: hidden;
+    perspective: 1000px;
+  }
+
+  .figure:last-child {
+    margin-right: 0;
+  }
+
+  .figure > span {
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: auto;
+    font: normal 5.94em/107px 'Lato', sans-serif;
+    font-weight: 700;
+    color: #B3C5B3;
+    backface-visibility: hidden;
+  }
+
+ 
+  </style>

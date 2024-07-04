@@ -1,0 +1,75 @@
+
+/* Define la animación */
+@keyframes draw {
+  from {
+    stroke-dasharray: 0, 1000;
+  }
+  to {
+    stroke-dasharray: 1000, 0;
+  }
+}
+
+/* Aplica la animación a los trazos */
+.cls-1, .cls-2 {
+  stroke: black; /* Cambia esto si necesitas un color diferente */
+  stroke-width: 2; /* Ajusta el grosor del trazo según sea necesario */
+  fill: none; /* Asegúrate de que el relleno esté desactivado para ver el trazo */
+  stroke-dasharray: 1000;
+  animation: draw 5s forwards;
+}
+
+label{
+  font-size: 2rem;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+    }
+input[type=number] { -moz-appearance:textfield; }
+
+input[type=number] { 
+  width: 30px;
+    height: 30px;
+    font-size: 1.8rem;
+    text-align: center;
+ }
+
+ input[type="text"] {
+  width: 425px;
+  font-size: 1.8rem;
+}
+textarea {
+  resize: vertical;
+  width: 425px;
+  font-size: 1.8rem;
+}
+
+
+.icon-clock {
+  opacity: 0;
+  transform: translateX(-20px);
+  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+
+.icon-calendar {
+  opacity: 0;
+  transform: translateX(-40px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.icon-map {
+  opacity: 0;
+  transform: translateX(-60px);
+  transition: opacity 1.1s ease-out, transform 1.1s ease-out;
+}
+
+.icon-info.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.cuenta-atras {
+  font-size: 6rem;
+}

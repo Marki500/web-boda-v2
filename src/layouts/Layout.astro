@@ -1,0 +1,42 @@
+---
+import '@fontsource/great-vibes';
+import '@fontsource/noto-sans-limbu';
+import Noise from '@/components/Noise.astro';
+import Hero from '@/sections/Hero.astro';
+import InfoSite from '@/sections/InfoSite.astro';
+import Formulario from '@/components/Formulario.astro';
+import Countdown from '@/components/Countdown.astro';
+
+const { title } = Astro.props;
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content="TODO" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favico-contravientoymarea.png" />
+    <script src="/src/scripts/scroll.js"></script>
+    <script src="/src/scripts/change-color-scroll.js"></script>
+    <script src="/src/scripts/scroll-icons.js"></script>
+    <title>{title}</title>
+  </head>
+  <body>
+    <Noise />
+    <Hero />
+    <Countdown />
+    <InfoSite />
+    <Formulario />
+  </body>
+</html>
+<style is:global>
+  html {
+    font-family: 'Great Vibes', system-ui, sans-serif;
+    background: #B9CCB9;
+    background-size: 224px;
+  }
+  p {
+    font-family: 'Noto Sans Limbu', sans-serif;
+  }
+</style>

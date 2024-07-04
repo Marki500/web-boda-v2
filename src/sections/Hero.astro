@@ -1,0 +1,23 @@
+---
+import HeroArrow from '../components/HeroArrow.astro'
+import '@/styles/global.css';
+---
+
+<section id="hero-section" class="static
+ h-screen flex flex-col gap-16 items-center justify-center">
+    <!-- <h1 class="text-6xl text-center">
+        <span class="text-8xl">Andrea</span>
+        <br>
+        &amp; 
+        <br>
+        <span class="text-8xl">Marc</span>
+    </h1>
+    <span class="text-5xl text-center">
+        23 / 05 / 2025
+    </span> -->
+    <object id="hero-image" type="image/svg+xml" data="./hero-img-draw.svg" class="w-[500px] scroll-effect"></object>
+
+    <div class="absolute bottom-12 scroll-effect">
+        <HeroArrow />
+    </div>
+</section>

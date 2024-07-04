@@ -1,0 +1,152 @@
+---
+import mysql from 'mysql2/promise';
+import dotenv from 'dotenv';
+dotenv.config();
+
+async function obtenerDatos() {
+  const connection = await mysql.createConnection({
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_NAME
+  });
+
+  let respuestasConNombres = [];
+  let nombresDormir = [];
+  let nombresInvitados = [];
+
+  try {
+    const [respuestasConNombresData] = await connection.execute(`
+      SELECT r.attend, GROUP_CONCAT(i.nombre SEPARATOR ', ') AS nombres, r.allergies 
+      FROM formulario_respuestas r 
+      LEFT JOIN nombres_invitados i ON r.id = i.respuesta_id
+      GROUP BY r.id
+    `);
+
+    const [nombresDormirData] = await connection.execute('SELECT * FROM nombres_dormir');
+    const [nombresInvitadosData] = await connection.execute('SELECT * FROM nombres_invitados');
+    
+    respuestasConNombres = respuestasConNombresData;
+    nombresDormir = nombresDormirData;
+    nombresInvitados = nombresInvitadosData;
+  } catch (error) {
+    console.error("Error al obtener datos de la base de datos:", error);
+  } finally {
+    await connection.end();
+  }
+
+  return { respuestasConNombres, nombresDormir, nombresInvitados };
+}
+
+const { respuestasConNombres, nombresDormir, nombresInvitados } = await obtenerDatos();
+---
+
+<html>
+<head>
+  <title>Información de la Boda</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #E6F4EA; /* Fondo verde pastel */
+      color: #333; /* Color del texto */
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #fff; /* Fondo blanco para el contenido */
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+    h1, h2 {
+      text-align: center;
+      color: #2D6A4F; /* Verde oscuro */
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 12px;
+      text-align: left;
+      vertical-align: top;
+      background-color: #fff;
+    }
+    th {
+      background-color: #95D5B2; /* Verde claro */
+      font-weight: bold;
+      color: #2D6A4F; /* Verde oscuro */
+    }
+    tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+    button {
+      display: inline-block;
+      padding: 10px 20px;
+      margin: 10px 0;
+      font-size: 16px;
+      color: #fff;
+      background-color: #52B788; /* Verde medio */
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      text-align: center;
+      transition: background-color 0.3s ease;
+    }
+    button:hover {
+      background-color: #2D6A4F; /* Verde oscuro */
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Respuestas del Formulario</h1>
+    <table>
+      <tr>
+        <th>Asistencia</th>
+        <th>Nombre de los Invitados</th>
+        <th>Alergias</th>
+      </tr>
+      {respuestasConNombres.map(respuesta => (
+        <tr>
+          <td>{respuesta.attend ? 'Sí' : 'No'}</td>
+          <td>{respuesta.nombres}</td>
+          <td>{respuesta.allergies}</td>
+        </tr>
+      ))}
+    </table>
+    <button onclick="window.location.href='/api/excel/descargar-respuestas'">Descargar Respuestas</button>
+
+    <h2>Invitados que Pernoctarán</h2>
+    <table>
+      <tr>
+        <th>Nombre</th>
+      </tr>
+      {nombresDormir.map(persona => (
+        <tr>
+          <td>{persona.nombre}</td>
+        </tr>
+      ))}
+    </table>
+    <button onclick="window.location.href='/api/excel/descargar-dormir'">Descargar Invitados que Pernoctan</button>
+
+    <h2>Todos los Invitados</h2>
+    <table>
+      <tr>
+        <th>Nombre</th>
+      </tr>
+      {nombresInvitados.map(persona => (
+        <tr>
+          <td>{persona.nombre}</td>
+        </tr>
+      ))}
+    </table>
+    <button onclick="window.location.href='/api/excel/descargar-invitados'">Descargar Todos los Invitados</button>
+  </div>
+</body>
+</html>

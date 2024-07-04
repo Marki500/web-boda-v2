@@ -1,0 +1,57 @@
+---
+---
+<section class="flex flex-row text-center items-center justify-center gap-16 max-w-7xl m-auto pt-16 pb-16">
+  <form id="contactForm" class="w-7xl">
+    <label class="text-4xl">¿Vendrás?</label><br>
+    <div class="radios flex flex-row gap-8 items-center justify-center">
+      <div class="radio1">
+        <input type="radio" id="attendYes" name="attend" value="yes">
+        <label for="attendYes">Sí</label>
+      </div>
+      <div class="radio2">
+        <input type="radio" id="attendNo" name="attend" value="no">
+        <label for="attendNo">No</label><br>
+      </div>
+    </div>
+
+    <div class="guests flex flex-row gap-8">
+      <div class="column-invitados-boda" id="guestCountInput" style="display: none;">
+        <div class="flex flex-row gap-4 items-center justify-center">
+          <label for="guestsCount">¿Cuántos vendrán?</label>
+          <input type="number" id="guestsCount" name="guestsCount" min="0">
+        </div>
+    
+        <div id="guestNames"></div>
+      </div>
+  
+      <div class="invitados-dormir" id="overnightInput" style="display: none;">
+        <div class="flex flex-row gap-4 items-center justify-center">
+          <label for="overnightCount">¿Cuántos se quedarán a dormir?</label>
+          <input type="number" id="overnightCount" name="overnightCount" min="0">
+        </div>
+        <div id="overnightGuestNames"></div>
+      </div>
+  
+      
+    </div>
+
+    <div class="radio-pelu">
+      <div class="radio1-pelu">
+        <input type="radio" id="peluSi" name="pelu" value="yes">
+        <label for="peluSi">Sí</label>
+      </div>
+      <div class="radio2-pelu">
+        <input type="radio" id="peluNo" name="pelu" value="no">
+        <label for="peluNo">No</label><br>
+      </div>
+    </div>
+
+    <div id="allergiesInput" style="display: none;">
+      <label for="allergies">Alergias, intolerancias, preferencias dietéticas:</label><br>
+      <textarea id="allergies" name="allergies" rows="4"></textarea>
+    </div>
+
+    <button type="submit" class="align-middle select-none font-sans font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 px-6 rounded-lg bg-amber-800 text-white shadow-md shadow-gray-900/10 hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none">Enviar</button>
+  </form>
+  <script src="/src/scripts/form-handler.js"></script>
+</section>
