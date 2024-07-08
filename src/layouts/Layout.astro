@@ -7,6 +7,7 @@ import InfoSite from '@/sections/InfoSite.astro';
 import Formulario from '@/components/Formulario.astro';
 import Countdown from '@/components/Countdown.astro';
 import Music from '@/components/Music.astro';
+import Hero2 from '@/sections/Hero2.astro';
 
 const { title } = Astro.props;
 ---
@@ -18,14 +19,14 @@ const { title } = Astro.props;
     <meta name="description" content="TODO" />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favico-contravientoymarea.png" />
-    <script src="/src/scripts/scroll.js"></script>
+
     <script src="/src/scripts/change-color-scroll.js"></script>
     <script src="/src/scripts/scroll-icons.js"></script>
     <title>{title}</title>
   </head>
   <body>
     <Noise />
-    <Hero />
+    <Hero2 />
     <Countdown />
     <InfoSite />
     <Formulario />

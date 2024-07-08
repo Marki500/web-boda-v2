@@ -1,0 +1,38 @@
+---
+import HeroArrow from '../components/HeroArrow.astro'
+import '@/styles/global.css';
+---
+
+<section id="hero-section" class="static h-screen flex flex-col gap-16 items-center justify-center">
+    <div class="flex flex-row gap-40 row-img">
+        <div class="container-img">
+            <img loading="lazy" class="img-hero scroll-effect" src="./img1-test.webp" alt="">
+        </div>
+        <object id="hero-image" type="image/svg+xml" data="./hero-img-draw.svg" class="w-[500px] scroll-effect"></object>
+    </div>
+
+    <div class="absolute bottom-[-20px] scroll-effect">
+        <HeroArrow />
+    </div>
+</section>
+<style>
+
+    img.img-hero {
+        z-index: 0;
+        opacity: 0.7;
+        filter: grayscale(100%);
+         /* Añade la animación aquí */
+    }
+    
+    #hero-image {
+        z-index: 2;
+    }
+    .container-img {
+        width: 27vw;
+        height: 70vh;
+        background: white;
+        padding: 1rem 1rem 4rem 1rem;
+        rotate: -5deg;
+    }
+    
+    </style>

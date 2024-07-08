@@ -3,40 +3,36 @@ import HeroArrow from '../components/HeroArrow.astro'
 import '@/styles/global.css';
 ---
 
-<section id="hero-section" class="static
- h-screen flex flex-col gap-16 items-center justify-center">
+<section id="hero-section" class="static h-screen flex flex-col gap-16 items-center justify-center">
+    <img class="img-hero scroll-effect" src="./img1-test.webp" alt="">
     <object id="hero-image" type="image/svg+xml" data="./hero-img-draw.svg" class="w-[500px] scroll-effect"></object>
-    <div class="imgHero imgHero1 bg-white h-[200px] w-[150px]"></div>
-    <div class="imgHero imgHero2 bg-white h-[200px] w-[150px]"></div>
-    <div class="imgHero imgHero3 bg-white h-[200px] w-[150px]"></div>
-    <div class="imgHero imgHero4 bg-white h-[200px] w-[150px]"></div>
 
     <div class="absolute bottom-12 scroll-effect">
         <HeroArrow />
     </div>
 </section>
-
-
 <style>
-.imgHero1 {
-    position: absolute;
-    top: 17%;
-    left: 20%;
-}
-.imgHero2 {
-    position: absolute;
-    bottom: 25%;
-    left: 25%;
-}
-.imgHero3 {
-    position: absolute;
-    top: 25%;
-    right: 25%;
-}
-.imgHero4 {
-    position: absolute;
-    bottom: 25%;
-    right: 25%;
-}
 
-</style>
+    img.img-hero {
+        position: absolute;
+        z-index: 0;
+        opacity: 0.7;
+        filter: grayscale(100%);
+        animation: grow-center 2s ease-out forwards; /* Añade la animación aquí */
+    }
+    
+    #hero-image {
+        z-index: 2;
+    }
+    
+    @keyframes grow-center {
+        0% {
+            transform: scale(0.1); /* Inicia con la mitad del tamaño original */
+            opacity: 0.2; /* Opción adicional para hacer que la imagen sea transparente al inicio */
+        }
+        100% {
+            transform: scale(1); /* Termina con el tamaño original */
+            opacity: 0.7; /* Mantiene la opacidad definida inicialmente */
+        }
+    }
+    </style>

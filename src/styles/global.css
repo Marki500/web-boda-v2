@@ -1,4 +1,5 @@
 
+
 /* Define la animación */
 @keyframes draw {
   from {
@@ -92,4 +93,8 @@ textarea {
 .flex-row.gap-4,
 .flex-row.gap-8 {
   margin-bottom: 10px;
+}
+
+.img-hero{
+  padding: 0.5rem;
 }
