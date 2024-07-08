@@ -74,6 +74,22 @@ textarea {
   font-size: 6rem;
 }
 
-#peluCountNumber{
-  display: none;
+/* Estilos base para las transiciones */
+.hiddena {
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
+  transition: opacity 1s ease, max-height 1s ease;
+}
+
+.visiblea {
+  opacity: 1;
+  max-height: 100vh; /* Ajusta este valor según sea necesario */
+  transition: opacity 1s ease, max-height 1s ease;
+}
+
+/* Opcional: puedes añadir algo de margen y padding para mejor efecto */
+.flex-row.gap-4,
+.flex-row.gap-8 {
+  margin-bottom: 10px;
 }
