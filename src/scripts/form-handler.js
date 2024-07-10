@@ -33,8 +33,10 @@ document.addEventListener('DOMContentLoaded', function () {
   const peluGuestNamesDiv = document.getElementById('peluGuestNames');
   const allergiesInput = document.getElementById('allergiesInput');
   const guestCountInput = document.getElementById('guestCountInput');
+  const guestNoCountInput = document.getElementById('guestNoCountInput');
   const overnightInput = document.getElementById('overnightInput');
-  const test1 = document.getElementById('guests');
+  const rowGuests = document.getElementById('guests');
+  const rowGuestsNo = document.getElementById('guestsNo');
   const peluInput = document.getElementById('peluInput');
   const attendYes = document.getElementById('attendYes');
   const attendNo = document.getElementById('attendNo');
@@ -66,20 +68,24 @@ document.addEventListener('DOMContentLoaded', function () {
 
   attendYes.addEventListener('change', () => {
     guestCountInput.classList.replace('hiddena', 'visiblea');
+    guestNoCountInput.classList.replace('visiblea', 'hiddena');
     overnightInput.classList.replace('hiddena', 'visiblea');
     allergiesInput.classList.replace('hiddena', 'visiblea');
     peluInput.classList.replace('hiddena', 'visiblea');
-    test1.classList.replace('hiddena', 'visiblea');
+    rowGuests.classList.replace('hiddena', 'visiblea');
+    rowGuestsNo.classList.replace('visiblea', 'hiddena');
     previousGuestCount = addGuestInputs(guestNamesDiv, 1, previousGuestCount, 'nombreInvitado', 'Nombre del invitado');
     previousOvernightCount = addGuestInputs(overnightGuestNamesDiv, 1, previousOvernightCount, 'overnightGuestName', 'Nombre del invitado que se quedará a dormir');
   });
 
   attendNo.addEventListener('change', () => {
     guestCountInput.classList.replace('visiblea', 'hiddena');
+    guestNoCountInput.classList.replace('hiddena', 'visiblea');
     overnightInput.classList.replace('visiblea', 'hiddena');
     allergiesInput.classList.replace('visiblea', 'hiddena');
     peluInput.classList.replace('visiblea', 'hiddena');
-    test1.classList.replace('visiblea', 'hiddena');
+    rowGuests.classList.replace('visiblea', 'hiddena');
+    rowGuestsNo.classList.replace('hiddena', 'visiblea');
     guestNamesDiv.innerHTML = '';
     overnightGuestNamesDiv.innerHTML = '';
     previousGuestCount = 0;
