@@ -4,13 +4,6 @@ import dotenv from 'dotenv';
 
 dotenv.config(); // Asegúrate de que esto está aquí al principio
 
-// Imprimir las variables de entorno para verificar
-console.log("DB_HOST:", process.env.DB_HOST);
-console.log("DB_USER:", process.env.DB_USER);
-console.log("DB_PASSWORD:", process.env.DB_PASSWORD);
-console.log("DB_NAME:", process.env.DB_NAME);
-console.log('asdasdasdasd');
-
 const router = Router();
 
 // Configura la conexión a MariaDB
@@ -23,9 +16,13 @@ const pool = mysql.createPool({
 
 router.post('/submit', async (req, res) => {
   try {
-    const { attend, guestsCount, overnightCount, allergies, peluCount, ...names } = req.body;
+    let { attend, guestsCount, overnightCount, allergies, peluCount, ...names } = req.body;
 
-    if (!attend) {
+    if (typeof attend === 'string') {
+      attend = attend.toLowerCase() === 'yes' ? 1 : 0;
+    }
+
+    if (attend === undefined) {
       return res.status(400).json({ error: 'Attendance response is required.' });
     }
 
