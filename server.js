@@ -7,6 +7,7 @@ import { dirname } from 'path';
 import dotenv from 'dotenv';
 import formRoutes from './routes/formRoutes.js';
 import excelRoutes from './routes/excelRoutes.js';
+import formMusic from './routes/formMusic.js';
 
 dotenv.config(); // Asegúrate de que esto está aquí al principio
 
@@ -28,6 +29,7 @@ app.use(bodyParser.json());
 // Usar las rutas importadas
 app.use('/api/form', formRoutes);
 app.use('/api/excel', excelRoutes);
+app.use('/api/music', formMusic);
 
 // Proxy para redirigir solicitudes al servidor de desarrollo de Astro
 // Ejemplo: Aplicar el proxy solo a rutas específicas
