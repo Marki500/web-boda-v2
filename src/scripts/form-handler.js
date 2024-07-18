@@ -29,6 +29,7 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 
   const guestNamesDiv = document.getElementById('guestNames');
+  const guestNamesNoAssistDiv = document.getElementById('guestNamesNoAssist');
   const overnightGuestNamesDiv = document.getElementById('overnightGuestNames');
   const peluGuestNamesDiv = document.getElementById('peluGuestNames');
   const allergiesInput = document.getElementById('allergiesInput');
@@ -43,6 +44,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const peluSi = document.getElementById('peluSi');
   const peluNo = document.getElementById('peluNo');
   let previousGuestCount = 0;
+  let previousGuestCountNoAssist = 0;
   let previousOvernightCount = 0;
   let previousPeluCount = 0;
 
@@ -86,6 +88,7 @@ document.addEventListener('DOMContentLoaded', function () {
     peluInput.classList.replace('visiblea', 'hiddena');
     rowGuests.classList.replace('visiblea', 'hiddena');
     rowGuestsNo.classList.replace('hiddena', 'visiblea');
+    previousGuestCountNoAssist = addGuestInputs(guestNamesNoAssistDiv, 1, previousGuestCountNoAssist, 'NoAsistenombreInvitado', 'Nombre del invitado que no puede venir');
     guestNamesDiv.innerHTML = '';
     overnightGuestNamesDiv.innerHTML = '';
     previousGuestCount = 0;
@@ -97,20 +100,25 @@ document.addEventListener('DOMContentLoaded', function () {
     previousGuestCount = addGuestInputs(guestNamesDiv, numGuests, previousGuestCount, 'nombreInvitado', 'Nombre del invitado');
   });
 
+  document.getElementById('guestsCountNo').addEventListener('input', function() {
+    const numGuestsNo = parseInt(this.value) || 0;
+    previousGuestCountNoAssist = addGuestInputs(guestNamesNoAssistDiv, numGuestsNo, previousGuestCountNoAssist, 'NoAsistenombreInvitado', 'Nombre del invitado que no puede venir');
+  });
+
   document.getElementById('overnightCount').addEventListener('input', function() {
     const numOvernight = parseInt(this.value) || 0;
     previousOvernightCount = addGuestInputs(overnightGuestNamesDiv, numOvernight, previousOvernightCount, 'overnightGuestName', 'Nombre del invitado que se quedará a dormir');
   });
 
   peluSi.addEventListener('change', () => {
-    document.getElementById('peluCountNumber').classList.replace('hidden', 'visible');
+    document.getElementById('peluCountNumber').classList.replace('hiddena', 'visiblea');
     peluInput.classList.replace('hidden', 'visible');
     previousPeluCount = addGuestInputs(peluGuestNamesDiv, 1, previousPeluCount, 'peluGuestName', 'Nombre del invitado que quiere peluquería');
   });
 
   peluNo.addEventListener('change', () => {
-    document.getElementById('peluCountNumber').classList.replace('visible', 'hidden');
-    peluInput.classList.replace('visible', 'hidden');
+    document.getElementById('peluCountNumber').classList.replace('visiblea', 'hiddena');
+    //peluInput.classList.replace('visiblea', 'hiddena');
     peluGuestNamesDiv.innerHTML = '';
     previousPeluCount = 0;
   });

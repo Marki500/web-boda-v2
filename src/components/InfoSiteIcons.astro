@@ -112,7 +112,7 @@ fill="#000000" stroke="none">
         03 / 05 / 2025
     </p>
     </div>
-    <div class="flex flex-col flex-1 items-center justify-center">
+    <div class="flex flex-col flex-1 items-center justify-center hover-icon">
         <svg class="w-16 h-16 icon-map icon-info" version="1.0" xmlns="http://www.w3.org/2000/svg"
  width="512.000000pt" height="512.000000pt" viewBox="0 0 512.000000 512.000000"
  preserveAspectRatio="xMidYMid meet">
@@ -167,4 +167,26 @@ m669 -948 l658 -560 -452 -3 c-249 -1 -652 -1 -896 0 l-443 3 231 562 c128
     .icons-title{
         font-family: 'Great Vibes' ,system-ui, sans-serif;
     }
+    .hover-icon {
+    cursor: pointer;
+    transition: all 1s ease; /* Define la transición para todas las propiedades */
+}
+
+.hover-icon svg g {
+    transition: fill 1s ease; /* Transición para el color del SVG */
+}
+
+.hover-icon:hover svg g {
+    fill: red; /* Color al hacer hover */
+}
+
+.hover-icon .icons-title {
+    transition: color 1s ease, transform 1s ease; /* Transiciones definidas para el color, escala y tamaño de fuente */
+}
+
+.hover-icon:hover .icons-title {
+    color: red; /* Color al hacer hover */
+    transform: scale(1.2); /* Escala el texto en 20% */
+}
+
   </style>

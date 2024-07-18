@@ -18,9 +18,7 @@ router.post('/submit', async (req, res) => {
   try {
     let { attend, guestsCount, overnightCount, allergies, peluCount, ...names } = req.body;
 
-    if (typeof attend === 'string') {
-      attend = attend.toLowerCase() === 'yes' ? 1 : 0;
-    }
+    console.log('Form data received:', req.body);
 
     if (attend === undefined) {
       return res.status(400).json({ error: 'Attendance response is required.' });
@@ -36,6 +34,7 @@ router.post('/submit', async (req, res) => {
     const guestNames = [];
     const overnightNames = [];
     const peluNames = [];
+    const guestNoAssistNames = [];
 
     // Dividir los nombres en las categorías apropiadas
     for (let key in names) {
@@ -45,34 +44,52 @@ router.post('/submit', async (req, res) => {
         overnightNames.push([respuestaId, names[key]]);
       } else if (key.startsWith('peluGuestName')) {
         peluNames.push([respuestaId, names[key]]);
+      } else if (key.startsWith('NoAsiste')) {
+        guestNoAssistNames.push([respuestaId, names[key]]);
       }
     }
 
-    // Insertar nombres de invitados y de noche
-    if (guestNames.length > 0) {
-      await pool.query(
-        'INSERT INTO nombres_invitados (respuesta_id, nombre) VALUES ?',
-        [guestNames]
-      );
-    }
-    if (overnightNames.length > 0) {
-      await pool.query(
-        'INSERT INTO nombres_dormir (respuesta_id, nombre) VALUES ?',
-        [overnightNames]
-      );
-    }
+    console.log('Guest names to insert:', guestNames);
+    console.log('Overnight names to insert:', overnightNames);
+    console.log('Peluqueria names to insert:', peluNames);
+    console.log('Guest no assist names to insert:', guestNoAssistNames);
 
-    // Insertar nombres para peluquería
-    if (peluNames.length > 0) {
-      await pool.query(
-        'INSERT INTO nombres_peluqueria (respuesta_id, nombre) VALUES ?',
-        [peluNames]
-      );
+    if (attend === 'yes') {
+      // Insertar nombres de invitados y de noche si asisten
+      if (guestNames.length > 0) {
+        await pool.query(
+          'INSERT INTO nombres_invitados (respuesta_id, nombre) VALUES ?',
+          [guestNames]
+        );
+      }
+      if (overnightNames.length > 0) {
+        await pool.query(
+          'INSERT INTO nombres_dormir (respuesta_id, nombre) VALUES ?',
+          [overnightNames]
+        );
+      }
+
+      // Insertar nombres para peluquería si asisten
+      if (peluNames.length > 0) {
+        await pool.query(
+          'INSERT INTO nombres_peluqueria (respuesta_id, nombre) VALUES ?',
+          [peluNames]
+        );
+      }
+    } else {
+      // Insertar nombres de invitados que no pueden venir si no asisten
+      if (guestNoAssistNames.length > 0) {
+        const [noAssistResult] = await pool.query(
+          'INSERT INTO invitados_no_asisten (respuesta_id, nombre) VALUES ?',
+          [guestNoAssistNames]
+        );
+        console.log('No assist names inserted:', noAssistResult);
+      }
     }
 
     res.status(200).json({ id: respuestaId });
   } catch (error) {
-    console.error(error);
+    console.error('Error during form submission:', error);
     res.status(500).json({ error: 'Error al guardar los datos' });
   }
 });
