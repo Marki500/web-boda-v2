@@ -33,8 +33,8 @@ router.post('/submit', async (req, res) => {
     const respuestaId = results.insertId;
     const guestNames = [];
     const overnightNames = [];
-    const peluNames = [];
     const guestNoAssistNames = [];
+    const preferences = [];
 
     // Dividir los nombres en las categorías apropiadas
     for (let key in names) {
@@ -43,7 +43,15 @@ router.post('/submit', async (req, res) => {
       } else if (key.startsWith('overnightGuestName')) {
         overnightNames.push([respuestaId, names[key]]);
       } else if (key.startsWith('peluGuestName')) {
-        peluNames.push([respuestaId, names[key]]);
+        // Validar el nombre
+        if (names[key] && names[key] !== 'on') {
+          preferences.push({
+            respuesta_id: respuestaId,
+            nombre: names[key],
+            peluqueria: names[`${key}_pelu`] === 'on',
+            maquillaje: names[`${key}_maquillaje`] === 'on'
+          });
+        }
       } else if (key.startsWith('NoAsiste')) {
         guestNoAssistNames.push([respuestaId, names[key]]);
       }
@@ -51,11 +59,11 @@ router.post('/submit', async (req, res) => {
 
     console.log('Guest names to insert:', guestNames);
     console.log('Overnight names to insert:', overnightNames);
-    console.log('Peluqueria names to insert:', peluNames);
+    console.log('Preferences to insert:', preferences);
     console.log('Guest no assist names to insert:', guestNoAssistNames);
 
+    // Insertar nombres de invitados y de noche si asisten
     if (attend === 'yes') {
-      // Insertar nombres de invitados y de noche si asisten
       if (guestNames.length > 0) {
         await pool.query(
           'INSERT INTO nombres_invitados (respuesta_id, nombre) VALUES ?',
@@ -69,15 +77,15 @@ router.post('/submit', async (req, res) => {
         );
       }
 
-      // Insertar nombres para peluquería si asisten
-      if (peluNames.length > 0) {
+      // Insertar o actualizar preferencias de peluquería
+      for (const pref of preferences) {
+        // Actualizar la fila existente
         await pool.query(
-          'INSERT INTO nombres_peluqueria (respuesta_id, nombre) VALUES ?',
-          [peluNames]
+          'INSERT INTO nombres_peluqueria (respuesta_id, nombre, peluqueria, maquillaje) VALUES (?, ?, ?, ?) ON DUPLICATE KEY UPDATE peluqueria = VALUES(peluqueria), maquillaje = VALUES(maquillaje)',
+          [pref.respuesta_id, pref.nombre, pref.peluqueria ? 1 : 0, pref.maquillaje ? 1 : 0]
         );
       }
     } else {
-      // Insertar nombres de invitados que no pueden venir si no asisten
       if (guestNoAssistNames.length > 0) {
         const [noAssistResult] = await pool.query(
           'INSERT INTO invitados_no_asisten (respuesta_id, nombre) VALUES ?',

@@ -3,7 +3,7 @@
 ---
 <section class="flex flex-row text-center items-center justify-center gap-16 max-w-7xl m-auto pt-16 pb-16">
   <form id="contactForm" class="w-full">
-    <label class="text-4xl">¿Vendrás?</label><br>
+    <label class="text-2xl">¿Asistirás?</label><br>
     <div class="radios flex flex-row gap-8 items-center justify-center">
       <div class="radio1">
         <input type="radio" id="attendYes" name="attend" value="yes">
@@ -18,7 +18,7 @@
     <div class="guests flex flex-row gap-8 justify-center hiddena" id="guestsNo">
       <div class="column-invitados-boda" id="guestNoCountInput">
         <div class="flex flex-row gap-4 items-center justify-center">
-          <label for="guestsCountNo">¿Cuántos no vendrán?</label>
+          <label for="guestsCountNo">¿Cuántos no podeis asistir?</label>
           <input type="number" id="guestsCountNo" name="guestsCountNo" min="1" value="1" >
         </div>
 
@@ -29,7 +29,7 @@
     <div class="guests flex flex-row gap-8 justify-center hiddena" id="guests">
       <div class="column-invitados-boda" id="guestCountInput">
         <div class="flex flex-row gap-4 items-center justify-center">
-          <label for="guestsCount">¿Cuántos vendrán?</label>
+          <label for="guestsCount">¿Cuántos asistiréis?</label>
           <input type="number" id="guestsCount" name="guestsCount" min="1" value="1" >
         </div>
     
@@ -38,7 +38,7 @@
   
       <div class="invitados-dormir " id="overnightInput">
         <div class="flex flex-row gap-4 items-center justify-center">
-          <label for="overnightCount">¿Cuántos se quedarán a dormir?</label>
+          <label for="overnightCount">¿Cuántos os quedaréis a dormir? (30€/noche)</label>
           <input type="number" id="overnightCount" name="overnightCount" min="1" value="1" >
         </div>
         <div id="overnightGuestNames"></div>
@@ -52,7 +52,7 @@
 
     <!-- Sección de servicio de peluquería, inicialmente oculta -->
     <div class="radios-pelu flex flex-col items-center justify-center mt-8 hiddena" id="peluInput">
-      <label class="text-4xl">¿Necesitaréis servicio de peluquería?</label>
+      <label class="text-2xl">¿Necesitaréis servicio de peluquería y/o maquillaje?</label>
       <div class="radio-pelu flex flex-row items-center justify-center gap-8">
         <div class="radio1-pelu">
           <input type="radio" id="peluSi" name="pelu" value="yes">
@@ -64,7 +64,7 @@
         </div>
       </div>
       <div id="peluCountNumber" class="flex flex-row gap-4 items-center justify-center hiddena">
-        <label for="peluCount">¿Cuantas necesitan peluqueria?</label>
+        <label for="peluCount">¿Cuantas necesitaréis el servicio?</label>
         <input type="number" id="peluCount" name="peluCount" min="1" value="1">
       </div>
       <div id="peluGuestNames"></div>  <!-- Div para los nombres de los invitados que desean servicio de peluquería -->
@@ -74,3 +74,11 @@
   </form>
   <script src="/src/scripts/form-handler.js"></script>
 </section>
+
+<style>
+
+.container-guest-pelu {
+    display: flex;
+    gap: 2rem;
+}
+</style>

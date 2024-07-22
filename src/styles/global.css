@@ -1,4 +1,6 @@
-
+:root{
+  accent-color: rgb(139,61,13);
+}
 
 /* Define la animación */
 @keyframes draw {
@@ -20,7 +22,7 @@
 }
 
 label{
-  font-size: 2rem;
+  font-size: 18px;
 }
 
 input[type=number]::-webkit-inner-spin-button,
@@ -33,13 +35,13 @@ input[type=number] { -moz-appearance:textfield; }
 input[type=number] { 
   width: 30px;
     height: 30px;
-    font-size: 1.8rem;
+    font-size: 18px;
     text-align: center;
  }
 
  input[type="text"] {
   width: 425px;
-  font-size: 1.8rem;
+  font-size: 18px;
 }
 textarea {
   resize: vertical;
@@ -97,4 +99,30 @@ textarea {
 
 .img-hero{
   padding: 0.5rem;
+}
+
+.container-guest-pelu {
+  display: flex;
+  gap: 2rem;
+}
+
+form{
+  font-family: 'Noto Sans Limbu', sans-serif;
+  font-size: 18px;
+}
+
+input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+}
+.container-guest-pelu div{
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+div#overnightGuestNames,div#overnightInput,div#guestNames,div#peluGuestNames {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }

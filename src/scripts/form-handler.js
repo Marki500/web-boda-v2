@@ -48,21 +48,56 @@ document.addEventListener('DOMContentLoaded', function () {
   let previousOvernightCount = 0;
   let previousPeluCount = 0;
 
-  function addGuestInputs(div, count, previousCount, namePrefix, placeholderPrefix) {
+  function addGuestInputs(div, count, previousCount, namePrefix, placeholderPrefix, addCheckboxes = false) {
     const inputs = div.querySelectorAll('input[type="text"]');
+    const checkboxes = div.querySelectorAll('input[type="checkbox"]');
+
     if (count < previousCount) {
       for (let i = count; i < previousCount; i++) {
-        div.removeChild(inputs[i]);
-        div.removeChild(div.lastChild);
+        div.removeChild(div.lastChild); // Remove line break
+        div.removeChild(checkboxes[i * 2 + 1]); // Remove maquillaje checkbox
+        div.removeChild(checkboxes[i * 2]); // Remove pelu checkbox
+        div.removeChild(div.lastChild); // Remove name input
+        div.removeChild(div.lastChild); // Remove container div
       }
     } else {
       for (let i = previousCount; i < count; i++) {
+        const containerDiv = document.createElement('div');
+        containerDiv.className = 'container-guest-pelu';
+
         const input = document.createElement('input');
         input.type = 'text';
         input.name = `${namePrefix}${i}`;
         input.placeholder = `${placeholderPrefix} ${i + 1}`;
-        div.appendChild(input);
-        div.appendChild(document.createElement('br'));
+        containerDiv.appendChild(input);
+        
+        if (addCheckboxes) {
+          const peluDiv = document.createElement('div');
+          const peluCheckbox = document.createElement('input');
+          peluCheckbox.type = 'checkbox';
+          peluCheckbox.name = `${namePrefix}${i}_pelu`;
+          const peluLabel = document.createElement('label');
+          peluLabel.textContent = 'Peluquería';
+          peluDiv.appendChild(peluCheckbox);
+          peluDiv.appendChild(peluLabel);
+          containerDiv.appendChild(peluDiv);
+
+          const maquillajeDiv = document.createElement('div');
+          const maquillajeCheckbox = document.createElement('input');
+          maquillajeCheckbox.type = 'checkbox';
+          maquillajeCheckbox.name = `${namePrefix}${i}_maquillaje`;
+          const maquillajeLabel = document.createElement('label');
+          maquillajeLabel.textContent = 'Maquillaje';
+          maquillajeDiv.appendChild(maquillajeCheckbox);
+          maquillajeDiv.appendChild(maquillajeLabel);
+          containerDiv.appendChild(maquillajeDiv);
+          
+          containerDiv.appendChild(document.createElement('br'));
+        } else {
+          containerDiv.appendChild(document.createElement('br'));
+        }
+
+        div.appendChild(containerDiv);
       }
     }
     return count;
@@ -113,18 +148,20 @@ document.addEventListener('DOMContentLoaded', function () {
   peluSi.addEventListener('change', () => {
     document.getElementById('peluCountNumber').classList.replace('hiddena', 'visiblea');
     peluInput.classList.replace('hidden', 'visible');
-    previousPeluCount = addGuestInputs(peluGuestNamesDiv, 1, previousPeluCount, 'peluGuestName', 'Nombre del invitado que quiere peluquería');
+    previousPeluCount = addGuestInputs(peluGuestNamesDiv, 1, previousPeluCount, 'peluGuestName', 'Nombre del invitado que quiere peluquería o maquillaje', true);
   });
 
   peluNo.addEventListener('change', () => {
     document.getElementById('peluCountNumber').classList.replace('visiblea', 'hiddena');
-    //peluInput.classList.replace('visiblea', 'hiddena');
     peluGuestNamesDiv.innerHTML = '';
     previousPeluCount = 0;
   });
 
   document.getElementById('peluCount').addEventListener('input', function() {
+    if (previousPeluCount === 0) {
+      addPeluHeaders(peluGuestNamesDiv);
+    }
     const numPelu = parseInt(this.value) || 0;
-    previousPeluCount = addGuestInputs(peluGuestNamesDiv, numPelu, previousPeluCount, 'peluGuestName', 'Nombre del invitado que quiere peluquería');
+    previousPeluCount = addGuestInputs(peluGuestNamesDiv, numPelu, previousPeluCount, 'peluGuestName', 'Nombre del invitado que quiere peluquería o maquillaje', true);
   });
 });
