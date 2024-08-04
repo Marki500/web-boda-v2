@@ -41,12 +41,13 @@ input[type=number] {
 
  input[type="text"] {
   width: 425px;
+  height: 40px;
   font-size: 18px;
 }
 textarea {
   resize: vertical;
   width: 425px;
-  font-size: 1.8rem;
+  font-size: 18px;
 }
 
 
@@ -107,7 +108,7 @@ textarea {
 }
 
 form{
-  font-family: 'Noto Sans Limbu', sans-serif;
+  font-family: 'Raleway', sans-serif;
   font-size: 18px;
 }
 

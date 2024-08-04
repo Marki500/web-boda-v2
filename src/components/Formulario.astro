@@ -72,6 +72,8 @@
 
     <button type="submit" class="align-middle select-none font-sans font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 px-6 rounded-lg bg-amber-800 text-white shadow-md shadow-gray-900/10 hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none">Enviar</button>
   </form>
+  <div id="successMessage" class="mensaje-exito">¡Gracias por confirmar!</div>
+  <div id="errorMessage" class="mensaje-error">Hubo un error al enviar el formulario. Por favor, inténtalo de nuevo.</div>
   <script src="/src/scripts/form-handler.js"></script>
 </section>
 
@@ -81,4 +83,20 @@
     display: flex;
     gap: 2rem;
 }
+.oculto {
+    display: none!important;
+  }
+  .visible {
+    display: block!important;
+  }
+  .mensaje-exito {
+    display: none;
+    color: green;
+    font-size: 2rem;
+  }
+  .mensaje-error {
+    display: none;
+    color: red;
+    font-size: 2rem;
+  }
 </style>

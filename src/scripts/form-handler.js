@@ -1,5 +1,7 @@
 document.addEventListener('DOMContentLoaded', function () {
   const form = document.getElementById('contactForm');
+  const successMessage = document.getElementById('successMessage');
+  const errorMessage = document.getElementById('errorMessage');
 
   form.addEventListener('submit', async function (event) {
     event.preventDefault();
@@ -16,15 +18,23 @@ document.addEventListener('DOMContentLoaded', function () {
       });
 
       if (response.ok) {
+        form.classList.add('oculto');
+        successMessage.classList.add('visible');
+        successMessage.classList.remove('oculto');
         const responseData = await response.json();
         console.log('Datos enviados correctamente', responseData);
       } else {
         console.error('Error al enviar los datos, status:', response.status);
         const errorText = await response.json();
         console.error(errorText);
+        form.classList.add('oculto');
+        errorMessage.classList.add('visible');
+        errorMessage.classList.remove('oculto');
       }
     } catch (error) {
       console.error('Error en la solicitud:', error);
+      errorMessage.classList.add('visible');
+      errorMessage.classList.remove('oculto');
     }
   });
 

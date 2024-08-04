@@ -2,6 +2,7 @@
   "name": "web-boda-v2",
   "type": "module",
   "version": "0.0.1",
+  "homepage": "http://contravientoymarea.info",
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
@@ -13,6 +14,7 @@
     "@astrojs/node": "^8.3.2",
     "@astrojs/react": "^3.6.0",
     "@astrojs/tailwind": "^5.1.0",
+    "@fontsource-variable/raleway": "^5.0.20",
     "@fontsource/great-vibes": "^5.0.21",
     "@fontsource/noto-sans-limbu": "^5.0.13",
     "@types/react": "^18.3.3",
